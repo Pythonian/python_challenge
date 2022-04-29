@@ -1,7 +1,8 @@
 import subprocess
 import logging
 
-from flask import Flask
+import re
+from flask import Flask, request
 from flask import jsonify
 
 
@@ -17,9 +18,14 @@ git_hash = subprocess.check_output(
     ["git", "describe", "--always"]).decode().strip()
 
 
-@app.route('/helloworld')
+@app.route('/helloworld/')
 def hello():
-    return 'Hello Stranger'
+    name = request.args.get('name')
+    seperated_name = re.sub("([A-Z])", " \\1", name).strip()
+    if name:
+        return f'Hello {seperated_name}'
+    else:
+        return 'Hello Stranger'
 
 
 @app.route('/versionz')
