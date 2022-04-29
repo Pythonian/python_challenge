@@ -15,11 +15,14 @@ A Python app with Flask to attempt a coding challenge.
     $ cd python_challenge
 
 **Step 2**: Create a virtual environment
+
     $ python3 -m venv venv
     $ . venv/bin/activate
 
 **Step 3**: Install project requirements 
+
     $ pip install -r requirements
 
 **Step 4**: Startup local server
+
     $ make
