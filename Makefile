@@ -1,4 +1,4 @@
 run:
+	pip install -r requirements.txt
 	set FLASK_APP=app.py
-run:
 	python app.py

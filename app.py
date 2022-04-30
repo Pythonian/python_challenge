@@ -7,7 +7,7 @@ from flask import jsonify
 
 
 app = Flask(__name__)
-app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
+# app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
 
 
 logging.basicConfig(
@@ -33,8 +33,7 @@ def helloworld():
     seperated_name = re.sub("([A-Z])", " \\1", name).strip()
     if name:
         return f'Hello {seperated_name}'
-    else:
-        return 'Hi there'
+    return 'Hi there'
 
 
 @app.route('/versionz/')
@@ -44,5 +43,5 @@ def versionz():
         project_name='Python challenge')
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True, port=8080)
+if __name__ == '__main__':
+    app.run(debug=True, port=8080)
