@@ -7,7 +7,7 @@ from flask import jsonify
 
 
 app = Flask(__name__)
-# app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
+app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
 
 
 logging.basicConfig(
