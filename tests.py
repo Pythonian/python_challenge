@@ -1,6 +1,10 @@
 import unittest
+import subprocess
 from app import app
 from flask import url_for
+
+git_hash = subprocess.check_output(
+    ["git", "describe", "--always"]).decode().strip()
 
 
 class TestPage(unittest.TestCase):
@@ -30,7 +34,7 @@ class TestPage(unittest.TestCase):
         response = self.client.get(url_for('versionz'))
         self.assertEqual(
             response.json,
-            {'git_hash': '4211457',
+            {'git_hash': git_hash,
              'project_name': 'Python challenge'})
 
 
