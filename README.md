@@ -23,7 +23,11 @@ A Python app with Flask to attempt a coding challenge.
 
     $ make setup
 
-**Step 3**: Start the development server
+**Step 4**: Run the Tests
+
+    $ python tests.py
+
+**Step 5**: Start the development server
 
     $ make run
     

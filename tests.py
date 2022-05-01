@@ -1,6 +1,6 @@
 import unittest
 import subprocess
-from app import app
+from app import create_app
 from flask import url_for
 
 git_hash = subprocess.check_output(
@@ -9,7 +9,7 @@ git_hash = subprocess.check_output(
 
 class TestPage(unittest.TestCase):
     def setUp(self):
-        self.app = app
+        self.app = create_app()
         self.appctx = self.app.app_context()
         self.appctx.push()
         self.client = self.app.test_client()
