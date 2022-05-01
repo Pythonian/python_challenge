@@ -19,6 +19,11 @@ A Python app with Flask to attempt a coding challenge.
     $ python3 -m venv venv
     $ . venv/bin/activate
 
-**Step 3**: Run the command to install requirements and startup local server
+**Step 3**: Install the requirements
 
-    $ make
+    $ make setup
+
+**Step 3**: Start the development server
+
+    $ make run
+    

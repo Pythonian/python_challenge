@@ -1,14 +1,9 @@
-import subprocess
-import logging
-
 import re
+import logging
+import subprocess
+
 from flask import Flask, request
 from flask import jsonify
-
-
-app = Flask(__name__)
-app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
-
 
 logging.basicConfig(
     format='ISO DATE: %(asctime)s MESSAGE: %(message)s',
@@ -22,26 +17,38 @@ git_hash = subprocess.check_output(
     ["git", "describe", "--always"]).decode().strip()
 
 
-@app.route('/hello/')
-def hello():
-    return 'Hello Stranger'
+def create_app():
+    """
+    Creates a Flask application using the app factory pattern.
 
+    :return: Flask app
+    """
+    app = Flask(__name__)
 
-@app.route('/helloworld/')
-def helloworld():
-    name = request.args.get('name')
-    seperated_name = re.sub("([A-Z])", " \\1", name).strip()
-    if name:
-        return f'Hello {seperated_name}'
-    return 'Hi there'
+    app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
 
+    @app.route('/hello/')
+    def hello():
+        """
+        Render a Hello Stranger response.
 
-@app.route('/versionz/')
-def versionz():
-    return jsonify(
-        git_hash=git_hash,
-        project_name='Python challenge')
+        :return: Flask response
+        """
+        return 'Hello Stranger'
 
+    @app.route('/helloworld/')
+    def helloworld():
+        name = request.args.get('name')
+        if name:
+            seperated_name = re.sub("([A-Z])", " \\1", name).strip()
+            return f'Hello {seperated_name}'
+        return 'Hi there'
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    @app.route('/versionz/')
+    def versionz():
+        """ Render a JSON response. """
+        return jsonify(
+            git_hash=git_hash,
+            project_name='Python challenge')
+
+    return app
