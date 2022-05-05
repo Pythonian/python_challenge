@@ -1,7 +1,9 @@
 services:
   web:
     build: .
+    image: flaskapp:2.0
     ports:
       - 5000:5000
+    restart: always
     volumes:
       - ./:/app

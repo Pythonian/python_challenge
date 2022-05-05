@@ -1,9 +1,9 @@
 import re
+import socket
 import logging
 import subprocess
 
-from flask import Flask, request
-from flask import jsonify
+from flask import Flask, request, jsonify
 
 logging.basicConfig(
     format='ISO DATE: %(asctime)s MESSAGE: %(message)s',
@@ -25,8 +25,6 @@ def create_app():
     """
     app = Flask(__name__)
 
-    app.config['SERVER_NAME'] = 'localhost.localdomain:5000'
-
     @app.route('/hello/')
     def hello():
         """
@@ -44,10 +42,19 @@ def create_app():
             return f'Hello {seperated_name}'
         return 'Hi there'
 
+    @app.route('/health/')
+    def health():
+        return jsonify(
+            status="UP")
+
     @app.route('/versionz/')
     def versionz():
         """ Render a JSON response. """
+        hostname = socket.gethostname()
         return jsonify(
+            hostname=hostname,
+            host_ip=socket.gethostbyname(hostname),
+            ip=request.remote_addr,
             git_hash=git_hash,
             project_name='Python challenge')
 
