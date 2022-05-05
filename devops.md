@@ -32,3 +32,7 @@ kubectl apply -f deployment.yml // create the kubernetes deployment
 kubectl apply -f service.yml // deploy the service object
 
 kubectl get po,svc // get the nodeport and service port
+
+// Create Helm chart
+helm create flaskapp
+

@@ -44,17 +44,17 @@ def create_app():
 
     @app.route('/health/')
     def health():
-        return jsonify(
-            status="UP")
-
-    @app.route('/versionz/')
-    def versionz():
-        """ Render a JSON response. """
         hostname = socket.gethostname()
         return jsonify(
             hostname=hostname,
             host_ip=socket.gethostbyname(hostname),
             ip=request.remote_addr,
+            status="UP")
+
+    @app.route('/versionz/')
+    def versionz():
+        """ Render a JSON response. """
+        return jsonify(
             git_hash=git_hash,
             project_name='Python challenge')
 
